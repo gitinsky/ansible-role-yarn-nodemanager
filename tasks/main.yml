@@ -1,0 +1,10 @@
+---
+- name: create log directory
+  file: dest={{ hadoop_distr_prefix }}/logs state=directory owner={{ hadoop_user }} group={{ hadoop_user }}
+
+- name: put yarn-nodemanager-{{ env_name }}.rb eye config file
+  template: src=nodemanager.rb dest=/etc/eye/yarn-nodemanager-{{ env_name }}.rb owner=root group=root mode=0644
+
+- name: load config in eye
+  command: bash -c "source /usr/local/rvm/scripts/rvm && eye l /etc/eye/apps.eye"
+  sudo: yes
