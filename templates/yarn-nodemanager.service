@@ -4,8 +4,8 @@ Documentation=https://github.com/gitinsky/ansible-role-yarn-nodemanager
 
 [Service]
 Type=simple
-User={{ hadoop_user }}
-Group={{ hadoop_user }}
+User={{ yarn_user }}
+Group={{ yarn_user }}
 ExecStart={{ hadoop_distr_prefix }}/bin/yarn nodemanager
 StandardOutput=journal
 StandardError=journal

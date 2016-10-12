@@ -1,6 +1,9 @@
 ---
+- name: add YARN user
+  user: name={{ yarn_user }} shell={{ yarn_user_shell }} state=present
+
 - name: create log directory
-  file: dest={{ hadoop_distr_prefix }}/logs state=directory owner={{ hadoop_user }} group={{ hadoop_user }}
+  file: dest={{ hadoop_distr_prefix }}/logs/userlogs state=directory owner={{ yarn_user }} group={{ yarn_user }}
 
 - name: put yarn-nodemanager-{{ env_name }}.rb eye config file
   template: src=nodemanager.rb dest=/etc/eye/yarn-nodemanager-{{ env_name }}.rb owner=root group=root mode=0644

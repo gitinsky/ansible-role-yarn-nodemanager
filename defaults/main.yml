@@ -1,4 +1,6 @@
 hadoop_distr_prefix: /opt/hadoop
 hadoop_var_prefix: /var/hadoop
 hadoop_user: hadoop
+yarn_user: yarn
+yarn_user_shell: /usr/sbin/nologin
 env_name: default
