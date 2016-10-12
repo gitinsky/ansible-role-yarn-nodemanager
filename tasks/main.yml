@@ -4,7 +4,18 @@
 
 - name: put yarn-nodemanager-{{ env_name }}.rb eye config file
   template: src=nodemanager.rb dest=/etc/eye/yarn-nodemanager-{{ env_name }}.rb owner=root group=root mode=0644
+  when: "not (ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04')"
 
 - name: load config in eye
   command: bash -c "source /usr/local/rvm/scripts/rvm && eye l /etc/eye/apps.eye"
-  sudo: yes
+  become: yes
+  when: "not (ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04')"
+
+- name: put systemd unit file to its destination
+  template: src=yarn-nodemanager.service dest=/etc/systemd/system/yarn-nodemanager-{{ env_name }}.service owner=root group=root mode=0644
+  when: "ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'"
+  notify: systemctl daemon-reload
+
+- name: enable yarn-nodemanager service
+  service: name=yarn-nodemanager-{{ env_name }} enabled=yes state=started
+  when: "ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'"
