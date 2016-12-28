@@ -3,6 +3,9 @@ Description=YARN Nodemanager Service
 Documentation=https://github.com/gitinsky/ansible-role-yarn-nodemanager
 
 [Service]
+LimitNOFILE=65535
+Environment=LC_ALL=en_US.UTF-8
+Environment=LANG=en_US.UTF-8
 Type=simple
 User={{ yarn_user }}
 Group={{ yarn_user }}
