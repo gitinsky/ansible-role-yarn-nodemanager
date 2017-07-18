@@ -1,6 +1,8 @@
 Eye.application 'yarn-nodemanager-{{ env_name }}' do
   working_dir '/etc/eye'
   stdall '/var/log/eye/yarn-nodemanager-{{ env_name }}-stdall.log' # stdout,err logs for processes by default
+  env 'LC_ALL' => 'en_US.UTF-8'
+  env 'LANG' => 'en_US.UTF-8'
   trigger :flapping, times: 10, within: 1.minute, retry_in: 3.minutes
   check :cpu, every: 10.seconds, below: 100, times: 3 # global check for all processes
   uid "{{ yarn_user }}"
