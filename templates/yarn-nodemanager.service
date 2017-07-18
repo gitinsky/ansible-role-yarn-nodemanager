@@ -6,6 +6,7 @@ Documentation=https://github.com/gitinsky/ansible-role-yarn-nodemanager
 LimitNOFILE=65535
 Environment=LC_ALL=en_US.UTF-8
 Environment=LANG=en_US.UTF-8
+Environment=HADOOP_CLASSPATH=/opt/hadoop/lib/hadoop-lzo.jar
 Type=simple
 User={{ yarn_user }}
 Group={{ yarn_user }}
@@ -16,4 +17,3 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
-Alias=yarn-nodemanager-{{ env_name }}.service
