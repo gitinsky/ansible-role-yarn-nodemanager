@@ -10,7 +10,7 @@ Environment=HADOOP_CLASSPATH=/opt/hadoop/lib/hadoop-lzo.jar
 Type=simple
 User={{ yarn_user }}
 Group={{ yarn_user }}
-ExecStart={{ hadoop_distr_prefix }}/bin/yarn nodemanager
+ExecStart={{ hadoop_distr_prefix }}-{{ env_name }}-{{ hadoop_version }}/bin/yarn nodemanager
 StandardOutput=journal
 StandardError=journal
 Restart=always
